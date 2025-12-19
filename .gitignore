@@ -1,3 +1,6 @@
 cmake*
 .idea
 *.csv
+benchmarks/
+CMakeFiles/
+CMakeCache.txt
