@@ -20,23 +20,23 @@ Path SpaceTimeAStar::findOptimalPath(const set<int>& higher_agents, const vector
 {
     optimal = true;
     Path path;
-    num_expanded = 0;
+    num_expanded  = 0;
     num_generated = 0;
 
-    // build constraint table
+    // Build constraint table
     auto t = clock();
     ConstraintTable constraint_table(instance.num_of_cols, instance.map_size);
-    for (int a : higher_agents)
-    {
+    // Insert constraints from higher priority agents
+    for (int a : higher_agents) {
         constraint_table.insert2CT(*paths[a]);
     }
+    // Measures the time to build the constraint table
     runtime_build_CT = (double)(clock() - t) / CLOCKS_PER_SEC;
-
-    if (constraint_table.constrained(start_location, 0))
-    {
+    // Check whether start is constrained; if so, return empty path
+    if (constraint_table.constrained(start_location, 0)) {
         return path;
     }
-
+    // Measures the time to build the conflict avoidance table
     t = clock();
     constraint_table.insert2CAT(agent, paths);
     runtime_build_CAT = (double)(clock() - t) / CLOCKS_PER_SEC;

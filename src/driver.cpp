@@ -46,23 +46,26 @@ int main(int argc, char** argv)
 	srand((int)time(0));
 
 	///////////////////////////////////////////////////////////////////////////
-	// load the instance
-	Instance instance(vm["map"].as<string>(), vm["agents"].as<string>(),
-		vm["agentNum"].as<int>());
+	// Load the instance
+	Instance instance(vm["map"].as<string>(), vm["agents"].as<string>(), vm["agentNum"].as<int>());
 
 	srand(0);
+
+	// Solver
     PBS pbs(instance, vm["sipp"].as<bool>(), vm["screen"].as<int>());
-    // run
+	cout << "--- Instance loaded: " << vm["map"].as<string>() << " with " << instance.getDefaultNumberOfAgents() << " agents." << endl;
+
+    // Solve the instance
     double runtime = 0;
     pbs.solve(vm["cutoffTime"].as<double>());
+
     if (vm.count("output"))
         pbs.saveResults(vm["output"].as<string>(), vm["agents"].as<string>());
     if (pbs.solution_found && vm.count("outputPaths"))
-        pbs.savePaths(vm["outputPaths"].as<string>());
-    /*size_t pos = vm["output"].as<string>().rfind('.');      // position of the file extension
-    string output_name = vm["output"].as<string>().substr(0, pos);     // get the name without extension
-    cbs.saveCT(output_name); // for debug*/
-    pbs.clearSearchEngines();
+        //pbs.savePaths(vm["outputPaths"].as<string>());
+        pbs.saveMapNameAndPaths(vm["map"].as<string>(),vm["outputPaths"].as<string>());
+
+	pbs.clearSearchEngines();
 
 	return 0;
 

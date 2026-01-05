@@ -18,7 +18,7 @@ public:
 	uint64_t time_expanded = 0;
 	uint64_t time_generated = 0;
 
-	// conflicts in the current paths
+	// Conflicts in the current paths
 	list<shared_ptr<Conflict> > conflicts;
 	// The chosen conflict
 	shared_ptr<Conflict> conflict;

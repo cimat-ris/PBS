@@ -45,10 +45,12 @@ public:
 	void saveResults(const string &fileName, const string &instanceName) const;
 	void saveCT(const string &fileName) const; // write the CT to a file
     void savePaths(const string &fileName) const; // write the paths to a file
+	void saveMapNameAndPaths(const string &mapName, const string &fileName) const;
+
 	void clear(); // used for rapid random  restart
 private:
 	conflict_selection conflict_seletion_rule;
-
+	// The stack of nodes to be expanded (as in Algorithm 2)
     stack<PBSNode*> open_list;
 	list<PBSNode*> allNodes_table;
 
@@ -56,7 +58,9 @@ private:
     list<int> ordered_agents;
     vector<vector<bool>> priority_graph; // [i][j] = true indicates that i is lower than j
 
-    string getSolverName() const;
+	inline string getSolverName() const {
+		return "--- PBS with " + search_engines[0]->getName();
+	}
 
 	int screen;
 	
@@ -68,7 +72,7 @@ private:
 	int num_of_agents;
 
 
-	vector<Path*> paths;
+	vector<Path*> paths; // the plan
 	vector < SingleAgentSolver* > search_engines;  // used to find (single) agents' paths and mdd
 
     bool generateChild(int child_id, PBSNode* parent, int low, int high);
