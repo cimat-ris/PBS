@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
+from PIL import Image, ImageDraw
 
 agents_trajectories = {}
 agents_colors       = []
@@ -72,7 +73,6 @@ ax.imshow(map_array, cmap='gray', origin='upper')
 ax.scatter(ygoals, xgoals, c=agents_colors, s=25, marker='X')
 scat = ax.scatter(ypositions_per_frame[0], xpositions_per_frame[0], c="b", s=15)
 
-
 def update(frame):
     # for each frame, update the data stored on each artist.
     x = xpositions_per_frame[frame]
@@ -86,4 +86,6 @@ def update(frame):
 
 
 ani = animation.FuncAnimation(fig=fig, func=update, frames=max_length, interval=1)
-plt.show()
+#plt.show()
+ani.save('animation.gif', writer='pillow', fps=15) # Use the Pillow writer and set frames per second
+plt.close()

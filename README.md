@@ -67,3 +67,7 @@ In Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), 7643-76
 [2] Jiaoyang Li, Zhe Chen, Daniel Harabor, Peter J. Stuckey and Sven Koenig.
 MAPF-LNS2: Fast Repairing for Multi-Agent Path Finding via Large Neighborhood Search.
 In Proceedings of the AAAI Conference on Artificial Intelligence, (in print), 2022.
+
+
+![Alt Text](animation.gif)
+
